@@ -1,15 +1,16 @@
 ### Date created
-Include the date you created this project and README file.
+This project was created on 11/26/2020 and this README.md file on 11/27/2020
 
 ### Project Title
-Replace the Project Title
+Bikeshare Python Project
 
 ### Description
-Describe what your project is about and what it does
+A Python program that displays Bikeshare data.  Data is available for Chicago, New York City, and Washington.  
+The program prompts the user for city, month, and day.  The program then displays bikeshare data based on these
+inputs.
 
 ### Files used
-Include the files used
+Files: chicago.csv, new_york_city.csv, washington.csv
 
 ### Credits
-It's important to give proper credit. Add links to any repo that inspired you or blogposts you consulted.
-
+Internet assistance from:  https://stackoverflow.com and https://www.sharpsightlabs.com
