@@ -258,6 +258,8 @@ def raw_data_display(df,city):
                  print("Gender:  {}".format(df['Gender'].iloc[i]))
                  print("Birth Year:  {}".format(df['Birth Year'].iloc[i]))
               print("*******************************************\n")
+              # For Git Hub refactoring add another line of ***
+              print("*******************************************\n")
 
 
         # if the end of the raw data is at the end of the data frame exit
