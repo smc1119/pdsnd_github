@@ -21,12 +21,12 @@ def get_filters():
     valid_cities = ['chicago','new york city','washington']
     city = input("Enter city (Chicago, New York City, Washington): ").lower()
 
-    while True: 
+    while True:
 
         if city in valid_cities:
            break
         else:
-           city = input("\nCity not in Chicago, New York City, or Washington.  Try again: ").lower()   
+           city = input("\nCity not in Chicago, New York City, or Washington.  Try again: ").lower()
 
 
     # get user input for month (all, january, february, ... , june)
@@ -34,12 +34,12 @@ def get_filters():
     valid_months = ['all','january','february','march','april','may','june']
     month = input("Enter month ('All','January','February','March','April','May','June'): ").lower()
 
-    while True: 
+    while True:
 
         if month in valid_months:
            break
         else:
-           month = input("\nMonth not in 'All','January','February','March','April','May','June'. Try again: ").lower()   
+           month = input("\nMonth not in 'All','January','February','March','April','May','June'. Try again: ").lower()
 
 
     # get user input for day of week (all, monday, tuesday, ... sunday)
@@ -47,12 +47,12 @@ def get_filters():
     valid_days = ['all','monday','tuesday','wednesday','thursday','friday','saturday','sunday']
     day = input("Enter day ('All','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'): ").lower()
 
-    while True: 
+    while True:
 
         if day in valid_days:
            break
         else:
-           day = input("\nMonth not in 'All','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'. Try again: ").lower()   
+           day = input("\nMonth not in 'All','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'. Try again: ").lower()
 
 
     print('-'*40)
@@ -72,7 +72,7 @@ def load_data(city, month, day):
     """
     # load data file into a dataframe
     df = pd.read_csv(CITY_DATA[city])
-    
+
     # convert the Start Time column to datetime
     df['Start Time'] = pd.to_datetime(df['Start Time'])
 
@@ -95,7 +95,7 @@ def load_data(city, month, day):
         df = df[df['day_of_week'] == day.title()]
 
     # fill NaN values
-    if city != 'washington': 
+    if city != 'washington':
        df['Gender'] = df['Gender'].fillna('Not Provided')
 
     df['User Type'] = df['User Type'].fillna('Not Provided')
@@ -116,13 +116,13 @@ def time_stats(df):
     # convert to month name
     month_names = {1:'january', 2:'february', 3:'march', 4:'april', 5:'may', 6:'june'}
     common_month_name = month_names.get(common_month)
-    
-    print("\nMost common month:  {}".format(common_month_name.title())) 
+
+    print("\nMost common month:  {}".format(common_month_name.title()))
 
     # display the most common day of week
 
     common_day = df['day_of_week'].mode()[0]
-    print("\nMost common day:  {}".format(common_day.title())) 
+    print("\nMost common day:  {}".format(common_day.title()))
 
     # display the most common start hour
     # extract hour from the Start Time column to create an hour column
@@ -130,7 +130,7 @@ def time_stats(df):
 
     # find the most popular hour
     popular_hour = df['hour'].mode()[0]
-    print("\nMost common start hour:  {}".format(popular_hour)) 
+    print("\nMost common start hour:  {}".format(popular_hour))
 
 
     print("\nThis took %s seconds." % (time.time() - start_time))
@@ -146,18 +146,18 @@ def station_stats(df):
     # display most commonly used start station
 
     popular_start = df['Start Station'].mode()[0]
-    print("\nMost common start station:  {}".format(popular_start)) 
+    print("\nMost common start station:  {}".format(popular_start))
 
     # display most commonly used end station
 
     popular_end = df['End Station'].mode()[0]
-    print("\nMost common end station:  {}".format(popular_end)) 
+    print("\nMost common end station:  {}".format(popular_end))
 
     # display most frequent combination of start station and end station trip
 
     df['start end'] = df['Start Station'] + " / " + df['End Station']
     popular_combo = df['start end'].mode()[0]
-    print("\nMost frequent combination:  {}".format(popular_combo)) 
+    print("\nMost frequent combination:  {}".format(popular_combo))
 
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
@@ -171,18 +171,18 @@ def trip_duration_stats(df):
 
     # display total travel time
 
-    #  Help with displaying time in HH:MM:SS format from 
-    #  https://stackoverflow.com/questions/62198128/python-elapsed-time-as-days-hours-minutes-seconds    
+    #  Help with displaying time in HH:MM:SS format from
+    #  https://stackoverflow.com/questions/62198128/python-elapsed-time-as-days-hours-minutes-seconds
 
     duration_total = df['Trip Duration'].sum()
     duration_format = time.strftime('%H:%M:%S', time.gmtime(duration_total))
-    print("\nTotal Trip Duration (HH:MM:SS):  {}".format(duration_format))    
+    print("\nTotal Trip Duration (HH:MM:SS):  {}".format(duration_format))
 
     # display mean travel time
 
     duration_mean = df['Trip Duration'].mean()
     duration_mean_format = time.strftime('%H:%M:%S', time.gmtime(duration_mean))
-    print("\nTotal Trip Duration Mean (HH:MM:SS):  {}".format(duration_mean_format))    
+    print("\nTotal Trip Duration Mean (HH:MM:SS):  {}".format(duration_mean_format))
 
 
     print("\nThis took %s seconds." % (time.time() - start_time))
@@ -198,14 +198,14 @@ def user_stats(df,city):
     # Display counts of user types
 
     user_types = df.groupby(['User Type'])['User Type'].count()
-    
+
     print("\n")
     print(user_types)
 
 
-    if city != 'washington': 
+    if city != 'washington':
        # Display counts of gender
-     
+
        genders = df.groupby(['Gender'])['Gender'].count()
        print("\n")
        print(genders)
@@ -227,12 +227,12 @@ def raw_data_display(df,city):
     valid_YN = ['yes','no']
     response = input("Would you like to see some raw data (Yes, No): ").lower()
 
-    while True: 
+    while True:
 
         if response in valid_YN:
            break
         else:
-           response = input("\nPlease respond with (Yes, No):  Try again: ").lower()   
+           response = input("\nPlease respond with (Yes, No):  Try again: ").lower()
 
     if response == 'yes':
        df_rows = df['User Type'].count()
@@ -243,11 +243,13 @@ def raw_data_display(df,city):
           raw_end = 4
 
     #  Help with iloc from https://www.sharpsightlabs.com/blog/pandas-iloc/
-   
-       while True: 
+
+       while True:
           for i in range(raw_start,raw_end + 1):
               print("\n*******************************************")
-              print("Start Time:  {}".format(df['Start Time'].iloc[i])) 
+              # For Git Hub class refactoring add extra line of ***
+              print("\n*******************************************")
+              print("Start Time:  {}".format(df['Start Time'].iloc[i]))
               print("End Time:  {}".format(df['End Time'].iloc[i]))
               print("Trip Duration:  {}".format(df['Trip Duration'].iloc[i]))
               print("Start Station:  {}".format(df['Start Station'].iloc[i]))
@@ -262,24 +264,24 @@ def raw_data_display(df,city):
         # if the end of the raw data is at the end of the data frame exit
           if raw_end + 1 == df_rows:
              break
-            
+
           response = input("Would you like to see more raw data (Yes, No): ").lower()
 
-          while True: 
+          while True:
 
               if response in valid_YN:
                  break
               else:
-                 response = input("\nPlease respond with (Yes, No):  Try again: ").lower()   
-         
+                 response = input("\nPlease respond with (Yes, No):  Try again: ").lower()
+
           if response == "yes":
              raw_start += 5
              raw_end += 5
-         #adjust end if at the end of the dataframe 
-             if raw_end > df_rows - 1: 
+         #adjust end if at the end of the dataframe
+             if raw_end > df_rows - 1:
                 raw_end = df_rows - 1
           else:
-             break   
+             break
 
 
 def main():
